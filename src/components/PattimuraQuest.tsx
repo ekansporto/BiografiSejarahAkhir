@@ -90,7 +90,7 @@ const PUZZLES: PuzzleData[] = [
     title: "Terminal Alpha — Kapitan Pattimura",
     subtitle: "Verifikasi data sejarah untuk membuka akses",
     context:
-      "Thomas Matulessy lahir sekitar tahun 1783 di Hualoy, Seram, Maluku. Ia dikenal sebagai Kapitan Pattimura, pemimpin perlawanan rakyat Maluku melawan VOC/Belanda pada tahun 1817. Pattimura memimpin penyerangan terhadap Benteng Duurstede di Saparua. Ia ditangkap dan dihukum gantung pada 16 Desember 1817 di Ambon.",
+      "Thomas Matulessy lahir sekitar tahun 1783 di Hualoy, Seram, Maluku. Ia dikenal sebagai Kapitan Pattimura, pemimpin perlawanan rakyat Maluku melawan VOC/Belanda pada tahun 1817. Pergerakan ini menjadi salah satu pemberontakan paling terkenal di Maluku, yang melibatkan serangan langsung ke pusat pertahanan Belanda di kawasan Kepulauan Lease.",
     question: "Kapan Pattimura memimpin penyerangan terhadap Benteng Duurstede di Saparua?",
     answers: ["A. 14 Maret 1817", "B. 16 Mei 1817", "C. 20 April 1816", "D. 3 Juni 1818"],
     correctIndex: 1,
@@ -102,7 +102,7 @@ const PUZZLES: PuzzleData[] = [
     title: "Terminal Beta — Latar Belakang Perjuangan",
     subtitle: "Data terenkripsi — jawab untuk mendekripsi",
     context:
-      "Pattimura lahir dari keluarga bangsawan Maluku. Sebelum memimpin perlawanan, ia pernah menjadi sersan milisi di bawah pemerintahan Inggris. Ketika Belanda kembali berkuasa dan menerapkan monopoli rempah serta kerja paksa, rakyat Maluku marah dan bersatu.",
+      "Pattimura lahir dari keluarga bangsawan Maluku dan memiliki pengalaman dalam struktural militer. Ketika Belanda kembali berkuasa pasca-Inggris dan menerapkan kebijakan monopoli rempah serta kerja paksa yang berat, rakyat Maluku merasa tertindas. Latar belakang Pattimura di bidang militer membuat ia mampu mengorganisir perlawanan yang terstruktur dan efektif.",
     question: "Apa jabatan militer Pattimura sebelum memimpin perlawanan rakyat Maluku?",
     answers: ["A. Mayor Infanteri", "B. Kapten Marinir", "C. Sersan Milisi", "D. Laksamana Angkatan Laut"],
     correctIndex: 2,
@@ -114,7 +114,7 @@ const PUZZLES: PuzzleData[] = [
     title: "Terminal Gamma — Martha Christina Tiahahu",
     subtitle: "Aktivasi sistem memerlukan data pahlawan wanita",
     context:
-      "Martha Christina Tiahahu (1800–1818) adalah pejuang wanita Maluku, putri Kapitan Paulus Tiahahu. Ia ikut berperang bersama ayahnya dalam perlawanan Pattimura 1817 di usia 17 tahun. Setelah ditangkap, ia wafat 2 Januari 1818 di kapal Belanda Eversten karena mogok makan. Jasadnya dibuang ke Laut Banda.",
+      "Martha Christina Tiahahu (1800–1818) adalah pejuang wanita Maluku, putri Kapitan Paulus Tiahahu. Ia turut berjuang bersama ayahnya dalam perlawanan Pattimura 1817 di usia muda. Setelah tertangkap oleh pasukan Belanda, Martha menunjukkan semangat perjuangan yang luar biasa dengan menolak kerjasama. Kisah akhirnya menjadi inspirasi bagi generasi pejuang Maluku berikutnya.",
     question: "Bagaimana Martha Christina Tiahahu wafat?",
     answers: [
       "A. Tewas dalam pertempuran di Saparua",
@@ -133,7 +133,7 @@ PUZZLES.push(
     id: 3,
     title: "Terminal Delta — Benteng Duurstede",
     subtitle: "Identifikasi lokasi pertempuran",
-    context: "Benteng Duurstede adalah benteng peninggalan VOC yang terletak di Pulau Saparua, Maluku Tengah. Benteng ini menjadi target utama serangan rakyat Maluku pada 16 Mei 1817 di bawah pimpinan Kapitan Pattimura.",
+    context: "Benteng Duurstede adalah benteng peninggalan VOC yang merupakan simbol kekuasaan Belanda di Kepulauan Lease. Lokasi strategis benteng ini membuat ia menjadi target utama serangan rakyat Maluku dalam perlawanan 1817. Penyerangan ini dipimpin oleh Kapitan Pattimura dan melibatkan rakyat dari berbagai pulau di Maluku.",
     question: "Di pulau manakah Benteng Duurstede terletak?",
     answers: ["A. Saparua", "B. Ambon", "C. Seram", "D. Banda"],
     correctIndex: 0,
@@ -144,7 +144,7 @@ PUZZLES.push(
     id: 4,
     title: "Terminal Epsilon — Akhir Hidup Pattimura",
     subtitle: "Catat tanggal eksekusi",
-    context: "Setelah ditangkap pasukan Belanda, Kapitan Pattimura diadili dan dijatuhi hukuman mati. Ia dihukum gantung di depan Benteng Nieuw Victoria, Ambon, pada 16 Desember 1817.",
+    context: "Setelah ditangkap pasukan Belanda, Kapitan Pattimura diadili di Ambon oleh pengadilan VOC. Ia dijatuhi hukuman mati sebagai bentuk penindasan Belanda terhadap para pemimpin perlawanan. Eksekusi dilakukan secara terbuka sebagai pesan intimidasi kepada rakyat Maluku untuk menghentikan perlawanan mereka.",
     question: "Bagaimana Pattimura menemui akhir hidupnya?",
     answers: [
       "A. Tewas di medan perang Saparua",
@@ -160,7 +160,7 @@ PUZZLES.push(
     id: 5,
     title: "Terminal Zeta — Ayah Martha",
     subtitle: "Verifikasi silsilah pejuang",
-    context: "Martha Christina Tiahahu adalah putri Kapitan Paulus Tiahahu, seorang pemimpin perlawanan dari Nusalaut yang juga turut berjuang bersama Pattimura.",
+    context: "Martha Christina Tiahahu berasal dari keluarga pemimpin perlawanan yang kuat. Ayahnya merupakan salah satu kapitan penting dari daerah Nusalaut yang turut memimpin pasukan dalam perlawanan 1817 bersama Pattimura. Keluarga Martha dikenal sebagai garis depan perjuangan melawan penjajahan Belanda.",
     question: "Siapa nama ayah Martha Christina Tiahahu?",
     answers: ["A. Thomas Matulessy", "B. Said Perintah", "C. Kapitan Paulus Tiahahu", "D. Anthony Rhebok"],
     correctIndex: 2,
@@ -182,7 +182,7 @@ PUZZLES.push(
     id: 7,
     title: "Terminal Theta — Asal Daerah Martha",
     subtitle: "Tentukan tanah kelahiran",
-    context: "Martha Christina Tiahahu lahir pada 4 Januari 1800 di Desa Abubu, Pulau Nusalaut, Maluku. Ia tumbuh sebagai gadis pemberani yang menolak penjajahan sejak usia muda.",
+    context: "Martha Christina Tiahahu lahir pada 4 Januari 1800 di sebuah pulau kecil di Maluku Tengah. Sebagai anak dari keluarga bangsawan, ia tumbuh dalam lingkungan yang menolak penjajahan Belanda. Pendidikan dan latar belakang keluarganya membentuk karakter pemberani yang kemudian terwujud dalam partisipasinya dalam perlawanan 1817.",
     question: "Di pulau manakah Martha Christina Tiahahu dilahirkan?",
     answers: ["A. Saparua", "B. Ambon", "C. Haruku", "D. Nusalaut"],
     correctIndex: 3,
@@ -722,7 +722,7 @@ export function PattimuraQuest() {
           <h2 className="font-serif-display text-3xl sm:text-4xl text-beige">Escape From Digital World</h2>
           <p className="text-beige/70 text-sm mt-2">
             {!state.missionStarted
-              ? "🎯 Cari Kapitan Pattimura (sosok merah-emas) dan tekan E untuk memulai misi"
+              ? "Cari Kapitan Pattimura (sosok merah-emas) dan tekan E untuk memulai misi"
               : state.exitUnlocked
                 ? "✓ Semua pertanyaan selesai — menuju portal EXIT (kanan-bawah)"
                 : `Misi aktif: jawab ${TOTAL_QUESTIONS} pertanyaan di terminal sejarah`}
@@ -919,10 +919,7 @@ function PuzzleOverlay({ puzzle, answered, lastAnswerCorrect, selectedAnswer, on
     >
       <h3 className="font-serif-display text-xl sm:text-2xl text-gold">{puzzle.title}</h3>
       <p className="text-beige/60 text-xs tracking-wider mb-4">{puzzle.subtitle}</p>
-      <div className="bg-black/40 border border-gold/30 rounded p-3 mb-4">
-        <p className="text-gold text-xs mb-2 font-bold">📜 DATA SEJARAH</p>
-        <p className="text-beige/90 text-sm leading-relaxed">{puzzle.context}</p>
-      </div>
+      
       <p className="text-beige font-semibold mb-3">{puzzle.question}</p>
       <div className="space-y-2 mb-4">
         {puzzle.answers.map((ans, i) => {
