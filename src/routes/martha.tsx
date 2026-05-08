@@ -3,9 +3,9 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { Reveal } from "@/components/Reveal";
 import marthaImg from "@/assets/martha.jpg";
 import mapImg from "@/assets/map.jpg";
-import meetingImg from "@/assets/meeting-1817.jpg";
-import marthaHorseImg from "@/assets/martha-horse.jpg";
-import marthaBattleImg from "@/assets/martha-battle.jpg";
+import meetingImg from "@/assets/martha.jpg";
+import marthaHorseImg from "@/assets/hero-bg.jpg";
+import marthaBattleImg from "@/assets/battle-scene.jpg";
 
 export const Route = createFileRoute("/martha")({
   head: () => ({
@@ -194,9 +194,8 @@ function MarthaPage() {
                 return (
                   <Reveal key={p.t} direction={flip ? "right" : "left"} delay={i * 60}>
                     <article
-                      className={`md:grid md:grid-cols-2 md:gap-10 items-center ${
-                        flip ? "md:[&>*:first-child]:order-2" : ""
-                      }`}
+                      className={`md:grid md:grid-cols-2 md:gap-10 items-center ${flip ? "md:[&>*:first-child]:order-2" : ""
+                        }`}
                     >
                       {p.img ? (
                         <div className="parchment-panel p-3 mb-5 md:mb-0">

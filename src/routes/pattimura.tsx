@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Reveal } from "@/components/Reveal";
-import pattimuraImg from "@/assets/pattimura.jpg";
+import pattimuraImg from "@/assets/Asal-Usul-dan-Keluarga.webp";
 import battleImg from "@/assets/battle.jpg";
 import mapImg from "@/assets/map.jpg";
-import spiceImg from "@/assets/spice-warehouse.jpg";
-import chargeImg from "@/assets/pattimura-charge.jpg";
+import spiceImg from "@/assets/map.jpg";
+import chargeImg from "@/assets/pattimura.jpg";
 
 export const Route = createFileRoute("/pattimura")({
   head: () => ({
@@ -173,9 +173,8 @@ function PattimuraPage() {
                 return (
                   <Reveal key={p.t} direction={flip ? "right" : "left"} delay={i * 60}>
                     <article
-                      className={`md:grid md:grid-cols-2 md:gap-10 items-center ${
-                        flip ? "md:[&>*:first-child]:order-2" : ""
-                      }`}
+                      className={`md:grid md:grid-cols-2 md:gap-10 items-center ${flip ? "md:[&>*:first-child]:order-2" : ""
+                        }`}
                     >
                       {p.img ? (
                         <div className="parchment-panel p-3 mb-5 md:mb-0">
