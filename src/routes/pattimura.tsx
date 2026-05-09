@@ -1,11 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Reveal } from "@/components/Reveal";
-import pattimuraImg from "@/assets/Asal-Usul-dan-Keluarga.webp";
-import battleImg from "@/assets/battle.jpg";
+import pattimuraImg from "@/assets/patmura.jpeg";
+import battleImg from "@/assets/penyebuan.jpg";
 import mapImg from "@/assets/map.jpg";
-import spiceImg from "@/assets/map.jpg";
-import chargeImg from "@/assets/pattimura.jpg";
+import spiceImg from "@/assets/Banda1810Cole.jpg";
+import kapitenImg from "@/assets/patt.jpg";
+import chargeImg from "@/assets/duurstede.jpg";
+import lanjutanImg from "@/assets/sapparua.jpg";
+import gantungasImg from "@/assets/gann.jpg";
+import gantungImg from "@/assets/gantung.jpg";
+import warisanImg from "@/assets/uang.webp";
 
 export const Route = createFileRoute("/pattimura")({
   head: () => ({
@@ -52,6 +57,7 @@ const panels: Panel[] = [
   {
     t: "Diangkat Jadi Kapitan Besar",
     d: "Pada 14 Mei 1817 dalam pertemuan rahasia di hutan Pelawi, rakyat Saparua bersepakat mengangkat Thomas Matulessy sebagai Kapitan Besar. Para kapitan dari berbagai negeri bersumpah setia. Dua hari kemudian, Proklamasi Haria dibacakan — sebuah daftar 14 keluhan rakyat sekaligus pernyataan perlawanan terhadap kekuasaan kolonial.",
+    img: kapitenImg,
   },
   {
     t: "Penyerbuan Benteng Duurstede",
@@ -62,18 +68,22 @@ const panels: Panel[] = [
   {
     t: "Pertempuran Lanjutan",
     d: "Pasukan Pattimura beberapa kali memukul mundur ekspedisi Belanda yang dikirim dari Ambon. Pertempuran besar di Waisisil dan penyergapan di hutan-hutan Saparua menunjukkan kelihaian taktik gerilyanya. Belanda terpaksa mendatangkan bala bantuan dari Jawa dan menggunakan pengkhianat lokal untuk membongkar persembunyiannya.",
+    img: lanjutanImg,
   },
   {
     t: "Pengkhianatan & Penangkapan",
     d: "Setelah enam bulan perlawanan tanpa henti, Pattimura akhirnya tertangkap pada 11 November 1817 di sebuah rumah di Siri Sori akibat pengkhianatan Raja Booi. Belanda berkali-kali menawarkan pengampunan, jabatan, dan kekayaan asalkan ia mau bekerjasama — semua ditolaknya tegas. 'Pekerjaanku sudah selesai,' katanya kepada para penangkapnya.",
+    img: gantungImg,
   },
   {
     t: "Hukuman Gantung",
     d: "Pada 16 Desember 1817, Pattimura dihukum gantung di depan Benteng Victoria, Ambon. Sebelum wafat ia berkata: 'Pattimura-pattimura tua boleh dihancurkan, tapi Pattimura-pattimura muda akan bangkit.'",
+    img: gantungasImg,
   },
   {
     t: "Warisan",
     d: "Pemerintah Republik Indonesia menetapkan Pattimura sebagai Pahlawan Nasional pada 6 November 1973. Wajahnya diabadikan pada uang kertas pecahan Rp1.000, namanya digunakan untuk universitas, bandara, jalan, dan kapal perang TNI. Setiap 15 Mei diperingati sebagai Hari Pattimura di Maluku.",
+    img: warisanImg,
   },
 ];
 

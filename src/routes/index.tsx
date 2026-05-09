@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Reveal } from "@/components/Reveal";
 import heroBg from "@/assets/hero-bg.jpg";
-import pattimuraImg from "@/assets/pattimura.jpg";
-import marthaImg from "@/assets/martha.jpg";
+import pattimuraImg from "@/assets/patmura.jpeg";
+import marthaImg from "@/assets/martha (2).jpg";
 import mapImg from "@/assets/map.jpg";
 import battleImg from "@/assets/battle.jpg";
 
