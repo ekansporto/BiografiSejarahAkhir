@@ -57,118 +57,102 @@ const timeline = [
 ];
 
 const gallery = [
-  { src: beverImg, caption: "Benteng Beverwijk, Nusalaut" },
-  { src: duurstedeImg, caption: "Benteng Duurstede, Saparua" },
-  { src: parangsalawakuImg, caption: "Parang Salawaku — Senjata Pattimura" },
-  { src: monumenmImg, caption: "Monumen Martha Christina Tiahahu" },
-  { src: rumahpatImg, caption: "Kediaman Kapitan Pattimura, Haria" },
+  { src: beverImg, caption: "Benteng Beverwijk, Nusalaut", desc: "Benteng pertahanan yang diserang Martha Christina Tiahahu dengan keberanian luar biasa pada 1817." },
+  { src: duurstedeImg, caption: "Benteng Duurstede, Saparua", desc: "Benteng kolonial yang berhasil direbut oleh pasukan Pattimura pada 16 Mei 1817 dalam pertempuran heroik." },
+  { src: parangsalawakuImg, caption: "Parang Salawaku — Senjata Pattimura", desc: "Senjata tradisional Maluku yang menjadi simbol perlawanan dan semangat kemerdekaan Pattimura." },
+  { src: monumenmImg, caption: "Monumen Martha Christina Tiahahu", desc: "Peringatan akan jasa Martha, srikandi Maluku yang memilih gugur demi tanah air." },
+  { src: rumahpatImg, caption: "Kediaman Kapitan Pattimura, Haria", desc: "Rumah bersejarah tempat tinggal Kapitan Pattimura di kampung halaman Haria, Saparua." },
 ];
 
-function GallerySlider({ items }: { items: { src: string; caption: string }[] }) {
-  const [cur, setCur] = useState(0);
+function GallerySlider({ items }: { items: { src: string; caption: string; desc: string }[] }) {
+  const [offset, setOffset] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
-  const startX = useRef(0);
-  const startScroll = useRef(0);
-  const dragging = useRef(false);
+  const touchX = useRef(0);
+  const PER = 3;
+  const maxOffset = items.length - PER;
 
   const go = (idx: number) => {
-    const clamped = Math.max(0, Math.min(items.length - 1, idx));
-    setCur(clamped);
+    const clamped = Math.max(0, Math.min(maxOffset, idx));
+    setOffset(clamped);
     if (trackRef.current) {
-      const itemW = trackRef.current.children[0]?.clientWidth ?? 0;
-      trackRef.current.scrollTo({ left: clamped * (itemW + 16), behavior: "smooth" });
+      const cardW = trackRef.current.children[0]?.getBoundingClientRect().width ?? 0;
+      trackRef.current.style.transform = `translateX(-${clamped * (cardW + 16)}px)`;
     }
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCur((prev) => (prev + 1) % items.length);
-      if (trackRef.current) {
-        const itemW = trackRef.current.children[0]?.clientWidth ?? 0;
-        const nextIdx = (cur + 1) % items.length;
-        trackRef.current.scrollTo({ left: nextIdx * (itemW + 16), behavior: "smooth" });
-      }
-    }, 2000);
+ return (
+  <div className="select-none flex items-center gap-3">
+    {/* Tombol Kiri */}
+    <button
+      onClick={() => go(offset - 1)} disabled={offset === 0}
+      className="flex-shrink-0 w-10 h-10 rounded-full border border-gold/40 text-gold flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed hover:bg-gold/10 hover:border-gold/70 hover:scale-105 transition-all"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
 
-    return () => clearInterval(interval);
-  }, [cur, items.length]);
-
-  const onMouseDown = (e: React.MouseEvent) => {
-    dragging.current = true;
-    startX.current = e.clientX;
-    startScroll.current = trackRef.current?.scrollLeft ?? 0;
-  };
-
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!dragging.current || !trackRef.current) return;
-    trackRef.current.scrollLeft = startScroll.current - (e.clientX - startX.current);
-  };
-
-  const onMouseUp = (e: React.MouseEvent) => {
-    if (!dragging.current) return;
-    dragging.current = false;
-    const dx = startX.current - e.clientX;
-    if (Math.abs(dx) > 50) {
-      const nextIdx = dx > 0 ? cur + 1 : cur - 1;
-      const clamped = Math.max(0, Math.min(items.length - 1, nextIdx));
-      setCur(clamped);
-      if (trackRef.current) {
-        const itemW = trackRef.current.children[0]?.clientWidth ?? 0;
-        trackRef.current.scrollTo({ left: clamped * (itemW + 16), behavior: "smooth" });
-      }
-    }
-  };
-
-  return (
-    <div className="select-none">
+    {/* Track + Dots */}
+    <div className="flex-1 min-w-0">
       <div
-        ref={trackRef}
-        className="flex gap-4 overflow-x-hidden cursor-grab active:cursor-grabbing"
-        onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseUp}
+        className="overflow-hidden rounded-2xl"
+        onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
+        onTouchEnd={(e) => {
+          const dx = e.changedTouches[0].clientX - touchX.current;
+          if (Math.abs(dx) > 40) go(dx < 0 ? offset + 1 : offset - 1);
+        }}
       >
-        {items.map((g, i) => (
-          <figure
-            key={i}
-            className="relative overflow-hidden rounded-2xl border border-border shadow-classic flex-shrink-0 aspect-[4/5]"
-            style={{ minWidth: "clamp(260px, 40vw, 360px)" }}
-          >
-            <img
-              src={g.src}
-              alt={g.caption}
-              loading="lazy"
-              draggable={false}
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-maroon-deep via-maroon-deep/30 to-transparent opacity-80" />
-            <figcaption className="absolute bottom-0 left-0 right-0 p-5 text-beige font-serif-display text-lg bg-gradient-to-t from-black/90 via-black/70 to-transparent backdrop-blur-sm">
-              {g.caption}
-            </figcaption>
-          </figure>
-        ))}
+        <div
+          ref={trackRef}
+          className="flex gap-4"
+          style={{ transition: "transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94)" }}
+        >
+          {items.map((g, i) => (
+            <figure
+              key={i}
+              className="flex-shrink-0 rounded-2xl overflow-hidden relative border border-gold/20 group"
+              style={{ width: "calc(33.333% - 11px)", aspectRatio: "4/5" }}
+            >
+              <img
+                src={g.src} alt={g.caption} loading="lazy" draggable={false}
+                className="w-full h-full object-cover pointer-events-none transition-transform duration-600 group-hover:scale-[1.07]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/35 to-black/4 transition-all duration-400 group-hover:from-black/95 group-hover:via-black/65 group-hover:to-black/10" />
+              <figcaption className="absolute bottom-0 left-0 right-0 p-[1.1rem]">
+                <p className="text-beige font-serif-display text-[15px] leading-snug transition-transform duration-380 group-hover:-translate-y-11">
+                  {g.caption}
+                </p>
+                <p className="absolute bottom-[1.1rem] left-[1.1rem] right-[1.1rem] text-beige/78 text-xs leading-relaxed opacity-0 translate-y-2 transition-all duration-320 delay-[60ms] group-hover:opacity-100 group-hover:translate-y-0">
+                  {g.desc}
+                </p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 mt-6">
-        {items.map((_, i) => (
+      {/* Dots */}
+      <div className="flex items-center justify-center gap-2 mt-4">
+        {Array.from({ length: maxOffset + 1 }).map((_, i) => (
           <button
-            key={i}
-            onClick={() => {
-              setCur(i);
-              if (trackRef.current) {
-                const itemW = trackRef.current.children[0]?.clientWidth ?? 0;
-                trackRef.current.scrollTo({ left: i * (itemW + 16), behavior: "smooth" });
-              }
-            }}
-            aria-label={`Foto ${i + 1}`}
-            className={`rounded-full transition-all duration-300 ${i === cur ? "w-5 h-2 bg-gold" : "w-2 h-2 bg-gold/30 hover:bg-gold/60"
-              }`}
+            key={i} onClick={() => go(i)} aria-label={`Posisi ${i + 1}`}
+            className={`rounded-full transition-all duration-320 ${i === offset ? "w-6 h-2 bg-gold" : "w-[7px] h-[7px] bg-gold/25 hover:bg-gold/50"}`}
           />
         ))}
       </div>
     </div>
-  );
+
+    {/* Tombol Kanan */}
+    <button
+      onClick={() => go(offset + 1)} disabled={offset >= maxOffset}
+      className="flex-shrink-0 w-10 h-10 rounded-full border border-gold/40 text-gold flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed hover:bg-gold/10 hover:border-gold/70 hover:scale-105 transition-all"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="9 6 15 12 9 18" />
+      </svg>
+    </button>
+  </div>
+);
 }
 
 function Index() {
@@ -259,7 +243,7 @@ function Index() {
             <p className="font-serif-display text-2xl sm:text-4xl text-beige italic leading-relaxed">
               "Lebih baik mati berkalang tanah daripada hidup dijajah."
             </p>
-            <footer className="mt-6 text-gold tracking-widest text-sm">— SEMANGAT PERJUANGAN MALUKU</footer>
+            <footer className="mt-6 text-gold tracking-widest text-sm">SEMANGAT PERJUANGAN MALUKU.</footer>
           </blockquote>
         </Reveal>
       </section>
