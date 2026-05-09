@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { PattimuraQuest } from "@/components/PattimuraQuest";
-import battleScene from "@/assets/battle-scene.jpg";
+import battleScene from "@/assets/kuis.png";
 
 export const Route = createFileRoute("/kuis")({
   head: () => ({

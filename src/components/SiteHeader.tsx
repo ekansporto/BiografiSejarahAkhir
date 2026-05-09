@@ -20,18 +20,17 @@ export function SiteHeader() {
             { to: "/", label: "Beranda" },
             { to: "/pattimura", label: "Pattimura" },
             { to: "/martha", label: "Martha" },
-            { to: "/kuis", label: "Pertempuran" },
+            { to: "/kuis", label: "Kuis" },
           ].map((l) => {
             const active = pathname === l.to;
             return (
               <Link
                 key={l.to}
                 to={l.to}
-                className={`px-3 sm:px-4 py-2 rounded-full transition-all font-medium text-xs sm:text-sm ${
-                  active
-                    ? "bg-gradient-maroon text-beige shadow-glow"
-                    : "text-muted-foreground hover:text-beige hover:bg-card"
-                }`}
+                className={`px-3 sm:px-4 py-2 rounded-full transition-all font-medium text-xs sm:text-sm ${active
+                  ? "bg-gradient-maroon text-beige shadow-glow"
+                  : "text-muted-foreground hover:text-beige hover:bg-card"
+                  }`}
               >
                 {l.label}
               </Link>

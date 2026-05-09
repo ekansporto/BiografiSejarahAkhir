@@ -277,13 +277,13 @@ function PattimuraPage() {
             to="/martha"
             className="px-7 py-3 rounded-full border border-gold/60 text-gold font-medium hover:bg-gold/10 transition-colors"
           >
-            Kenal Martha Christina →
+            Kenal Martha →
           </Link>
           <Link
             to="/kuis"
             className="px-7 py-3 rounded-full bg-gradient-maroon text-beige font-medium shadow-glow hover:scale-105 transition-transform"
           >
-            ⚔ Mulai Pertempuran
+            ⚔ Mulai Kuis
           </Link>
         </div>
       </section>

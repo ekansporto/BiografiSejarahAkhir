@@ -129,14 +129,14 @@ function MarthaPage() {
       {/* HERO — central horse painting */}
       <section className="relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-15"
+          className="absolute inset-0 opacity-30"
           style={{
-            backgroundImage: `url(${mapImg})`,
+            backgroundImage: `url(${meetingImg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-maroon-deep/85 via-background/85 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-maroon-deep/60 via-background/70 to-background" />
         <div className="relative max-w-6xl mx-auto px-6 pt-12 pb-16 text-center">
           <Reveal>
             <div className="flex justify-center mb-4">
@@ -269,7 +269,7 @@ function MarthaPage() {
             to="/kuis"
             className="px-7 py-3 rounded-full bg-gradient-maroon text-beige font-medium shadow-glow hover:scale-105 transition-transform"
           >
-            ⚔ Mulai Pertempuran
+            ⚔ Mulai Kuis
           </Link>
         </div>
       </section>

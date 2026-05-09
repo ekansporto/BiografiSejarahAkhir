@@ -718,7 +718,7 @@ export function PattimuraQuest() {
     <section className="py-12 px-4 sm:px-6 border-t border-border">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-6">
-          <p className="text-gold tracking-[0.4em] text-xs mb-2">— PATTIMURA QUEST —</p>
+          <p className="text-gold tracking-[0.4em] text-xs mb-2">— PATTIMURA & MARTHA QUEST —</p>
           <h2 className="font-serif-display text-3xl sm:text-4xl text-beige">Escape From Digital World</h2>
           <p className="text-beige/70 text-sm mt-2">
             {!state.missionStarted
@@ -919,7 +919,7 @@ function PuzzleOverlay({ puzzle, answered, lastAnswerCorrect, selectedAnswer, on
     >
       <h3 className="font-serif-display text-xl sm:text-2xl text-gold">{puzzle.title}</h3>
       <p className="text-beige/60 text-xs tracking-wider mb-4">{puzzle.subtitle}</p>
-      
+
       <p className="text-beige font-semibold mb-3">{puzzle.question}</p>
       <div className="space-y-2 mb-4">
         {puzzle.answers.map((ans, i) => {

@@ -80,6 +80,19 @@ function GallerySlider({ items }: { items: { src: string; caption: string }[] })
     }
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCur((prev) => (prev + 1) % items.length);
+      if (trackRef.current) {
+        const itemW = trackRef.current.children[0]?.clientWidth ?? 0;
+        const nextIdx = (cur + 1) % items.length;
+        trackRef.current.scrollTo({ left: nextIdx * (itemW + 16), behavior: "smooth" });
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [cur, items.length]);
+
   const onMouseDown = (e: React.MouseEvent) => {
     dragging.current = true;
     startX.current = e.clientX;
@@ -95,7 +108,15 @@ function GallerySlider({ items }: { items: { src: string; caption: string }[] })
     if (!dragging.current) return;
     dragging.current = false;
     const dx = startX.current - e.clientX;
-    if (Math.abs(dx) > 50) go(dx > 0 ? cur + 1 : cur - 1);
+    if (Math.abs(dx) > 50) {
+      const nextIdx = dx > 0 ? cur + 1 : cur - 1;
+      const clamped = Math.max(0, Math.min(items.length - 1, nextIdx));
+      setCur(clamped);
+      if (trackRef.current) {
+        const itemW = trackRef.current.children[0]?.clientWidth ?? 0;
+        trackRef.current.scrollTo({ left: clamped * (itemW + 16), behavior: "smooth" });
+      }
+    }
   };
 
   return (
@@ -122,7 +143,7 @@ function GallerySlider({ items }: { items: { src: string; caption: string }[] })
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-maroon-deep via-maroon-deep/30 to-transparent opacity-80" />
-            <figcaption className="absolute bottom-0 left-0 right-0 p-5 text-beige font-serif-display text-lg">
+            <figcaption className="absolute bottom-0 left-0 right-0 p-5 text-beige font-serif-display text-lg bg-gradient-to-t from-black/90 via-black/70 to-transparent backdrop-blur-sm">
               {g.caption}
             </figcaption>
           </figure>
@@ -133,11 +154,16 @@ function GallerySlider({ items }: { items: { src: string; caption: string }[] })
         {items.map((_, i) => (
           <button
             key={i}
-            onClick={() => go(i)}
+            onClick={() => {
+              setCur(i);
+              if (trackRef.current) {
+                const itemW = trackRef.current.children[0]?.clientWidth ?? 0;
+                trackRef.current.scrollTo({ left: i * (itemW + 16), behavior: "smooth" });
+              }
+            }}
             aria-label={`Foto ${i + 1}`}
-            className={`rounded-full transition-all duration-300 ${
-              i === cur ? "w-5 h-2 bg-gold" : "w-2 h-2 bg-gold/30 hover:bg-gold/60"
-            }`}
+            className={`rounded-full transition-all duration-300 ${i === cur ? "w-5 h-2 bg-gold" : "w-2 h-2 bg-gold/30 hover:bg-gold/60"
+              }`}
           />
         ))}
       </div>
@@ -216,7 +242,7 @@ function Index() {
               to="/kuis"
               className="px-7 py-3.5 rounded-full border border-gold/60 text-gold font-medium hover:bg-gold/10 transition-colors"
             >
-              Uji Pengetahuan →
+              Mulai Kuis →
             </Link>
           </div>
         </div>
@@ -249,27 +275,33 @@ function Index() {
           </Reveal>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {heroes.map((h, i) => (
-              <Reveal key={h.name} direction={i === 0 ? "left" : "right"} delay={i * 150}>
-                <article className="group bg-card rounded-2xl p-8 border border-border shadow-classic hover:border-gold/50 transition-all hover:-translate-y-1 duration-500">
-                  <div className="relative w-40 h-40 mx-auto mb-6">
-                    <div className="absolute inset-0 rounded-full bg-gradient-maroon blur-xl opacity-60 group-hover:opacity-100 transition-opacity" />
-                    <img
-                      src={h.img}
-                      alt={h.name}
-                      width={768}
-                      height={768}
-                      loading="lazy"
-                      className="relative w-40 h-40 rounded-full object-cover border-4 border-gold/70 shadow-classic group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <h3 className="font-serif-display text-2xl text-beige text-center">{h.name}</h3>
-                  <p className="text-gold text-center text-sm tracking-wider mt-1">{h.title}</p>
-                  <p className="text-muted-foreground text-center text-sm mt-2">Lahir: {h.born}</p>
-                  <p className="mt-5 text-beige/80 leading-relaxed text-center">{h.bio}</p>
-                </article>
-              </Reveal>
-            ))}
+            {heroes.map((h, i) => {
+              const route = i === 0 ? "/pattimura" : "/martha";
+              return (
+                <Reveal key={h.name} direction={i === 0 ? "left" : "right"} delay={i * 150}>
+                  <Link
+                    to={route}
+                    className="group bg-card rounded-2xl p-8 border border-border shadow-classic hover:border-gold/50 transition-all hover:-translate-y-1 duration-500 block cursor-pointer"
+                  >
+                    <div className="relative w-40 h-40 mx-auto mb-6">
+                      <div className="absolute inset-0 rounded-full bg-gradient-maroon blur-xl opacity-60 group-hover:opacity-100 transition-opacity" />
+                      <img
+                        src={h.img}
+                        alt={h.name}
+                        width={768}
+                        height={768}
+                        loading="lazy"
+                        className="relative w-40 h-40 rounded-full object-cover border-4 border-gold/70 shadow-classic group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <h3 className="font-serif-display text-2xl text-beige text-center">{h.name}</h3>
+                    <p className="text-gold text-center text-sm tracking-wider mt-1">{h.title}</p>
+                    <p className="text-muted-foreground text-center text-sm mt-2">Lahir: {h.born}</p>
+                    <p className="mt-5 text-beige/80 leading-relaxed text-center">{h.bio}</p>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -354,8 +386,7 @@ function Index() {
               Sudah siap menguji pengetahuanmu?
             </h2>
             <p className="mt-5 text-beige/80 text-lg leading-relaxed">
-              Mainkan simulasi naratif singkat dan buktikan seberapa dalam kamu memahami
-              perjuangan rakyat Maluku tahun 1817.
+              Seberapa dalam kamu mengenal Kapitan dan Srikandi Maluku? Buktikan pengetahuanmu sekarang.
             </p>
             <Link
               to="/kuis"
