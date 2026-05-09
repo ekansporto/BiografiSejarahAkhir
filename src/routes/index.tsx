@@ -1,3 +1,4 @@
+import { animate, motion, useMotionValue } from "framer-motion";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -5,8 +6,11 @@ import { Reveal } from "@/components/Reveal";
 import heroBg from "@/assets/hero-bg.jpg";
 import pattimuraImg from "@/assets/patmura.jpeg";
 import marthaImg from "@/assets/martha (2).jpg";
-import mapImg from "@/assets/map.jpg";
-import battleImg from "@/assets/battle.jpg";
+import beverImg from "@/assets/bever.jpg";
+import duurstedeImg from "@/assets/duurstede.jpg";
+import parangsalawakuImg from "@/assets/parangsalawaku.jpg";
+import monumenmImg from "@/assets/monumenm.jpg";
+import rumahpatImg from "@/assets/rumahpat.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,15 +36,15 @@ const heroes = [
     title: "Kapitan Pattimura",
     born: "1783, Haria, Saparua",
     img: pattimuraImg,
-    bio: "Kapitan Pattimura adalah pahlawan Maluku yang memimpin perlawanan terhadap Belanda pada tahun 1817. Ia pernah menjadi sersan di militer Inggris sebelum memimpin rakyat melawan kebijakan Belanda yang merugikan. Ia terkenal karena berhasil menyerang Benteng Duurstede pada 16 Mei 1817. Pattimura kemudian ditangkap dan dihukum gantung pada 16 Desember 1817 di Ambon. Semboyan: “Lebih baik mati daripada dijajah!”.",
+    bio: 'Kapitan Pattimura adalah pahlawan Maluku yang memimpin perlawanan terhadap Belanda pada tahun 1817. Ia pernah menjadi sersan di militer Inggris sebelum memimpin rakyat melawan kebijakan Belanda yang merugikan. Ia terkenal karena berhasil menyerang Benteng Duurstede pada 16 Mei 1817. Pattimura kemudian ditangkap dan dihukum gantung pada 16 Desember 1817 di Ambon. Semboyan: "Lebih baik mati daripada dijajah!".',
   },
   {
     name: "Martha Christina Tiahahu",
     title: "Srikandi Maluku",
     born: "4 Januari 1800, Nusalaut",
     img: marthaImg,
-    bio: "Martha Christina Tiahahu adalah pahlawan wanita Maluku yang berjuang bersama Pattimura pada tahun 1817. Di usia 17 tahun, ia memimpin pasukan perempuan menyerbu Benteng Beverwijk dengan keberanian luar biasa. Setelah ditangkap, ia wafat pada 2 Januari 1818 di atas kapal Eversten akibat aksi mogok makan sebagai bentuk perlawanan terakhir. Martha adalah simbol kesetiaan dan keberanian yang lebih memilih gugur daripada tunduk kepada penjajah."
-  }
+    bio: "Martha Christina Tiahahu adalah pahlawan wanita Maluku yang berjuang bersama Pattimura pada tahun 1817. Di usia 17 tahun, ia memimpin pasukan perempuan menyerbu Benteng Beverwijk dengan keberanian luar biasa. Setelah ditangkap, ia wafat pada 2 Januari 1818 di atas kapal Eversten akibat aksi mogok makan sebagai bentuk perlawanan terakhir. Martha adalah simbol kesetiaan dan keberanian yang lebih memilih gugur daripada tunduk kepada penjajah.",
+  },
 ];
 
 const timeline = [
@@ -53,15 +57,99 @@ const timeline = [
 ];
 
 const gallery = [
-  { src: battleImg, caption: "Penyerbuan Benteng Duurstede, 1817" },
-  { src: mapImg, caption: "Peta Kepulauan Maluku" },
-  { src: heroBg, caption: "Senja di Tanah Maluku" },
+  { src: beverImg, caption: "Benteng Beverwijk, Nusalaut" },
+  { src: duurstedeImg, caption: "Benteng Duurstede, Saparua" },
+  { src: parangsalawakuImg, caption: "Parang Salawaku — Senjata Pattimura" },
+  { src: monumenmImg, caption: "Monumen Martha Christina Tiahahu" },
+  { src: rumahpatImg, caption: "Kediaman Kapitan Pattimura, Haria" },
 ];
+
+function GallerySlider({ items }: { items: { src: string; caption: string }[] }) {
+  const [cur, setCur] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const startX = useRef(0);
+  const startScroll = useRef(0);
+  const dragging = useRef(false);
+
+  const go = (idx: number) => {
+    const clamped = Math.max(0, Math.min(items.length - 1, idx));
+    setCur(clamped);
+    if (trackRef.current) {
+      const itemW = trackRef.current.children[0]?.clientWidth ?? 0;
+      trackRef.current.scrollTo({ left: clamped * (itemW + 16), behavior: "smooth" });
+    }
+  };
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    dragging.current = true;
+    startX.current = e.clientX;
+    startScroll.current = trackRef.current?.scrollLeft ?? 0;
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!dragging.current || !trackRef.current) return;
+    trackRef.current.scrollLeft = startScroll.current - (e.clientX - startX.current);
+  };
+
+  const onMouseUp = (e: React.MouseEvent) => {
+    if (!dragging.current) return;
+    dragging.current = false;
+    const dx = startX.current - e.clientX;
+    if (Math.abs(dx) > 50) go(dx > 0 ? cur + 1 : cur - 1);
+  };
+
+  return (
+    <div className="select-none">
+      <div
+        ref={trackRef}
+        className="flex gap-4 overflow-x-hidden cursor-grab active:cursor-grabbing"
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+      >
+        {items.map((g, i) => (
+          <figure
+            key={i}
+            className="relative overflow-hidden rounded-2xl border border-border shadow-classic flex-shrink-0 aspect-[4/5]"
+            style={{ minWidth: "clamp(260px, 40vw, 360px)" }}
+          >
+            <img
+              src={g.src}
+              alt={g.caption}
+              loading="lazy"
+              draggable={false}
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-maroon-deep via-maroon-deep/30 to-transparent opacity-80" />
+            <figcaption className="absolute bottom-0 left-0 right-0 p-5 text-beige font-serif-display text-lg">
+              {g.caption}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <div className="flex items-center justify-center gap-2 mt-6">
+        {items.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => go(i)}
+            aria-label={`Foto ${i + 1}`}
+            className={`rounded-full transition-all duration-300 ${
+              i === cur ? "w-5 h-2 bg-gold" : "w-2 h-2 bg-gold/30 hover:bg-gold/60"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function Index() {
   const [scrollY, setScrollY] = useState(0);
   const timelineRef = useRef<HTMLDivElement>(null);
   const [timelineProgress, setTimelineProgress] = useState(0);
+
   useEffect(() => {
     const onScroll = () => {
       setScrollY(window.scrollY);
@@ -143,7 +231,7 @@ function Index() {
         <Reveal>
           <blockquote className="max-w-4xl mx-auto text-center">
             <p className="font-serif-display text-2xl sm:text-4xl text-beige italic leading-relaxed">
-              “Lebih baik mati berkalang tanah daripada hidup dijajah.”
+              "Lebih baik mati berkalang tanah daripada hidup dijajah."
             </p>
             <footer className="mt-6 text-gold tracking-widest text-sm">— SEMANGAT PERJUANGAN MALUKU</footer>
           </blockquote>
@@ -200,23 +288,22 @@ function Index() {
           </Reveal>
 
           <div className="relative" ref={timelineRef}>
-            {/* Track */}
             <div className="absolute left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-gold/15 rounded-full" />
-            {/* Animated fill */}
             <div
               className="absolute left-1/2 top-0 w-[3px] -translate-x-1/2 rounded-full overflow-visible"
               style={{
                 height: `${timelineProgress}%`,
-                background: "linear-gradient(to bottom, transparent, oklch(0.78 0.14 75) 10%, oklch(0.88 0.16 80) 50%, oklch(0.78 0.14 75) 90%, transparent)",
+                background:
+                  "linear-gradient(to bottom, transparent, oklch(0.78 0.14 75) 10%, oklch(0.88 0.16 80) 50%, oklch(0.78 0.14 75) 90%, transparent)",
                 transition: "height 0.4s cubic-bezier(0.25,0.46,0.45,0.94)",
                 boxShadow: "0 0 20px oklch(0.78 0.14 75 / 0.6)",
               }}
             >
-              {/* Glow at tip */}
               <div
                 className="absolute -left-2 -bottom-6 w-[18px] h-[40px] rounded-full pointer-events-none animate-pulse"
                 style={{
-                  background: "radial-gradient(ellipse at center, oklch(0.92 0.16 80 / 0.9) 0%, oklch(0.78 0.14 75 / 0.4) 40%, transparent 70%)",
+                  background:
+                    "radial-gradient(ellipse at center, oklch(0.92 0.16 80 / 0.9) 0%, oklch(0.78 0.14 75 / 0.4) 40%, transparent 70%)",
                   filter: "blur(2px)",
                 }}
               />
@@ -254,24 +341,7 @@ function Index() {
             </div>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {gallery.map((g, i) => (
-              <Reveal key={i} delay={i * 120}>
-                <figure className="group relative overflow-hidden rounded-2xl border border-border shadow-classic aspect-[4/5]">
-                  <img
-                    src={g.src}
-                    alt={g.caption}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-maroon-deep via-maroon-deep/30 to-transparent opacity-80" />
-                  <figcaption className="absolute bottom-0 left-0 right-0 p-5 text-beige font-serif-display text-lg translate-y-2 group-hover:translate-y-0 transition-transform">
-                    {g.caption}
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
+          <GallerySlider items={gallery} />
         </div>
       </section>
 
