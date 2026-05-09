@@ -39,7 +39,7 @@ const heroes = [
     title: "Srikandi Maluku",
     born: "4 Januari 1800, Nusalaut",
     img: marthaImg,
-    bio: "Martha Christina Tiahahu adalah pahlawan wanita Maluku yang berjuang bersama Pattimura melawan Belanda. Ia ikut bertempur sejak usia 17 tahun dan menunjukkan keberanian luar biasa. Setelah ditangkap, ia wafat pada 2 Januari 1818 di kapal Belanda karena mogok makan sebagai bentuk perlawanan. Martha dikenal sebagai simbol keberanian perempuan dalam perjuangan."
+    bio: "Martha Christina Tiahahu adalah pahlawan wanita Maluku yang berjuang bersama Pattimura pada tahun 1817. Di usia 17 tahun, ia memimpin pasukan perempuan menyerbu Benteng Beverwijk dengan keberanian luar biasa. Setelah ditangkap, ia wafat pada 2 Januari 1818 di atas kapal Eversten akibat aksi mogok makan sebagai bentuk perlawanan terakhir. Martha adalah simbol kesetiaan dan keberanian yang lebih memilih gugur daripada tunduk kepada penjajah."
   }
 ];
 
@@ -298,7 +298,7 @@ function Index() {
       </section>
 
       <footer className="py-10 border-t border-border text-center text-muted-foreground text-sm">
-        © {new Date().getFullYear()} Pahlawan Maluku · Untuk mengenang jasa para pejuang.
+        © {new Date().getFullYear()} Knftspt & Sofus - Sejarah Perjuangan Maluku.
       </footer>
     </div>
   );

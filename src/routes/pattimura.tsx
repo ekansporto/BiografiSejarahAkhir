@@ -289,7 +289,7 @@ function PattimuraPage() {
       </section>
 
       <footer className="py-10 border-t border-gold/20 text-center text-muted-foreground text-sm">
-        © {new Date().getFullYear()} Pahlawan Maluku
+        © {new Date().getFullYear()}  Knftspt & Sofus - Sejarah Perjuangan Maluku.
       </footer>
     </div>
   );

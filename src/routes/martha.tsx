@@ -1,11 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Reveal } from "@/components/Reveal";
-import marthaImg from "@/assets/martha.jpg";
+import marthaImg from "@/assets/martha (3).jpg";
+import parangImg from "@/assets/parang.jpg";
 import mapImg from "@/assets/map.jpg";
-import meetingImg from "@/assets/martha.jpg";
-import marthaHorseImg from "@/assets/hero-bg.jpg";
-import marthaBattleImg from "@/assets/battle-scene.jpg";
+import meetingImg from "@/assets/terdepan.png";
+import marthaBattleImg from "@/assets/perang.jpg";
+import tertangkapImg from "@/assets/benteng.jpg";
+import kapalImg from "@/assets/kapall.jpg";
+import lautImg from "@/assets/laut.jpg";
+import patungImg from "@/assets/patung.jpg";
+import marImg from "@/assets/mar.jpg";
 
 export const Route = createFileRoute("/martha")({
   head: () => ({
@@ -48,6 +53,8 @@ const panels: Panel[] = [
     t: "Tumbuh Bersama Semangat Perlawanan",
     date: "1815 — 1817",
     d: "Sejak remaja, Martha sudah ahli memainkan tombak dan parang. Ia mengikuti kursus perang dari para kapitan tua, menguasai taktik bertahan di medan berbukit, dan memahami pentingnya pela-gandong sebagai kekuatan pemersatu antarkampung di Maluku.",
+    img: parangImg,
+    alt: "Martha dengan tombak dan parang, simbol perlawanan Maluku",
   },
   {
     t: "Awal Perjuangan",
@@ -67,21 +74,29 @@ const panels: Panel[] = [
     t: "Tertangkap Bersama Sang Ayah",
     date: "Oktober 1817",
     d: "Setelah perlawanan mulai melemah karena bantuan Belanda yang besar dari Ambon dan Jawa, ayahnya, Kapitan Paulus Tiahahu, ditangkap dan dijatuhi hukuman mati di benteng Beverwijk pada Oktober 1817. Martha menyaksikan eksekusi sang ayah dengan tegar — kemudian ia sendiri ditangkap bersama 39 pejuang lain.",
+    img: tertangkapImg,
+    alt: "Martha dan ayahnya tertangkap oleh Belanda",
   },
   {
     t: "Penangkapan",
     date: "Desember 1817",
     d: "Karena masih di bawah umur, Martha tidak dijatuhi hukuman mati. Sebagai gantinya, ia akan dibuang ke Pulau Jawa dan dipekerjakan paksa di perkebunan kopi milik Belanda. Ia dinaikkan ke kapal perang Eversten bersama tahanan-tahanan lain pada penghujung Desember 1817.",
+    img: kapalImg,
+    alt: "Kapal perang Belanda Eversten yang membawa Martha ke Jawa",
   },
   {
     t: "Mogok Makan & Wafat",
     date: "2 Januari 1818",
     d: "Di atas kapal Eversten, Martha menolak makan, menolak obat, dan menolak semua bentuk kerjasama dengan Belanda. Tubuhnya semakin lemah, namun semangatnya tak pernah pudar. Pada 2 Januari 1818, dua hari sebelum ulang tahunnya yang ke-18, Martha wafat di Laut Banda. Jenazahnya dilarung ke laut dengan upacara militer — laut Banda menjadi makam abadinya.",
+    img: lautImg,
+    alt: "Laut Banda, tempat Martha dimakamkan",
   },
   {
     t: "Warisan & Pengakuan",
     date: "1969 — Kini",
     d: "Pemerintah Indonesia menganugerahkan gelar Pahlawan Nasional kepada Martha Christina Tiahahu pada 20 Mei 1969. Tanggal kematiannya, 2 Januari, diperingati sebagai Hari Martha Christina Tiahahu di Maluku. Patungnya berdiri tegak di Karang Panjang, Ambon — sosok gadis muda mengangkat tombak, menatap ke arah Laut Banda.",
+    img: patungImg,
+    alt: "Patung Martha Christina Tiahahu di Ambon",
   },
 ];
 
@@ -134,26 +149,18 @@ function MarthaPage() {
             <p className="font-serif-display text-2xl sm:text-3xl text-beige/90 mt-3">
               Martha Christina Tiahahu
             </p>
-            <div className="gold-divider w-56 mx-auto mt-6" />
-          </Reveal>
-
-          {/* central pop-out painting */}
-          <Reveal delay={150}>
-            <div className="mt-10 relative max-w-md mx-auto">
-              <div className="absolute -inset-6 bg-gradient-gold blur-3xl opacity-25" />
-              <div className="parchment-panel p-3">
-                <img
-                  src={marthaHorseImg}
-                  alt="Martha Christina Tiahahu menunggang kuda dengan tombak"
-                  className="w-full rounded-md sepia-[0.1]"
-                  width={900}
-                  height={1100}
-                />
-              </div>
-              <p className="mt-4 text-gold/90 tracking-[0.3em] text-[10px]">
-                — ADULT MARTHA CHRISTINA TIAHAHU —
+            <div className="mx-auto mt-6 max-w-[420px]">
+              <img
+                src={marImg}
+                alt="Martha Christina Tiahahu"
+                loading="lazy"
+                className="mx-auto w-full h-auto object-cover rounded-3xl border border-gold/30 shadow-[0_0_40px_rgba(255,215,0,0.2)]"
+              />
+              <p className="text-xs uppercase tracking-[0.35em] text-beige/70 mt-3">
+                - adult cristina tiahahu -
               </p>
             </div>
+            <div className="gold-divider w-56 mx-auto mt-6" />
           </Reveal>
         </div>
       </section>
@@ -268,7 +275,7 @@ function MarthaPage() {
       </section>
 
       <footer className="py-10 border-t border-gold/20 text-center text-muted-foreground text-sm">
-        © {new Date().getFullYear()} Pahlawan Maluku
+        © {new Date().getFullYear()}  Knftspt & Sofus - Sejarah Perjuangan Maluku.
       </footer>
     </div>
   );
